@@ -1,0 +1,34 @@
+This repo contains a C implementation of the transit search algorithm
+of Aigrain & Irwin (2004), and a Python interface to it.
+
+MyBLS is very similar to the well-known box-least squares (BLS)
+algorithm of Kovacs, Zucker & Mazeh (2002). The main differences are
+a) that the out-of-transit level is assumed to be the light curve
+median rather than being re-computed at every step, and b) that the
+sums involved in the transit detection statistic are computed first
+for single transits, and then combined for each trial period /
+epoch. These modifications both speed up the code without altering the
+performance signficantly. 
+
+Additionally, the range of transit durations to search is specified in
+units of the duration that would be expected for an equatorial transit
+of a planet in front of a Sun-like stars, rather than in hours. This
+means that different actual durations are explored for different trial
+periods, if the period range is broad.
+
+To compile and test the code:
+ > make -f makefile.c
+ > ./bls
+for the C version, and 
+ > make -f makefile.py
+ > ./MyBLS_PY_example.py
+for the Python version. The two versions should hopefully produce the same output.
+
+The python wrapper is contained in MyBLS_PY.c and MyBLS_PY.h, which
+creates the library (aka python module)
+MyBLS_PY.so. MyBLS_PY_example.py is an example python script which
+calls the MyBLS python function (which is mybls_py in the C file).
+
+To get the code to compile, you may have to change the include
+directories in the makefile which point to the relevant C header files
+Python.h and numpy/arrayobject.h.
