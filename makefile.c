@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -g -O -Wall
 
 # Linker flags
-LIBS = -lgfortran -lm -lz
+LIBS = -lm -lz
 
 #### End constants section ####
 
